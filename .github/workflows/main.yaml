@@ -47,11 +47,6 @@ jobs:
         uses: ludeeus/action-shellcheck@master
         with:
           severity: error
-
-      - name: Check path
-        run: | 
-          ls /var/log/journal
-          ls /var/log/containers
     
   centos7-amd64:
     name: centos7-amd64-test
