@@ -66,8 +66,7 @@ jobs:
 
     - name: Run centos7, Setup fluentbit, send logs to kafka
       run: |
-        docker run -d  -v /tmp/pods:/var/log/pods --platform linux/amd64 --name centos7 --net="host" ${{ env.REGISTRY_REPO}}:${{ env.REGISTRY_TAG }}
-        docker exec -it centos7 bash -c "tail -n 100 /etc/fluent-bit/logs/fluent-bit.log"
+        docker run -d  -v /tmp/pods:/var/log/pods --platform linux/amd64 --net="host" ${{ env.REGISTRY_REPO}}:${{ env.REGISTRY_TAG }}
 
     - name: Listening topics
       run: |
@@ -92,8 +91,7 @@ jobs:
     - name: Run centos7, Setup fluentbit, send logs to kafka
       run: |
         docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
-        docker run -d -v /tmp/pods:/var/log/pods --platform linux/arm64/v8 --name centos7 --net="host" ${{ env.REGISTRY_REPO}}:${{ env.REGISTRY_TAG }}
-        docker exec -it centos7 bash -c "tail -n 100 /etc/fluent-bit/logs/fluent-bit.log "
+        docker run -d -v /tmp/pods:/var/log/pods --platform linux/arm64/v8 --net="host" ${{ env.REGISTRY_REPO}}:${{ env.REGISTRY_TAG }}
 
     - name: Listening topics
       run: |
