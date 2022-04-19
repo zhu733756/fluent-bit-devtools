@@ -6,14 +6,14 @@ workdir /etc/fluent-bit
 
 COPY fluentbit.repo /etc/yum.repos.d/fluentbit.repo
 
-RUN mkdir -p /etc/fluent-bit/logs/ /etc/fluent-bit/config/
+RUN mkdir -p /etc/fluent-bit/logs/ /etc/fluent-bit/config/ /fluent-bit/tail
 
-COPY ./conf/fluent-bit.conf /etc/fluent-bit/
+COPY ./conf/logging-stack.conf /etc/fluent-bit/fluent-bit.conf
 COPY ./conf/systemd.lua /etc/fluent-bit/config/systemd.lua
 
 RUN yum install fluent-bit -y
 
-RUN cp  /opt/fluent-bit/bin/fluent-bit /usr/local/bin/ 
+RUN cp /opt/fluent-bit/bin/fluent-bit /usr/local/bin/ 
 
 RUN chmod +x /usr/local/bin/fluent-bit && fluent-bit -c /etc/fluent-bit/fluent-bit.conf & > /etc/fluent-bit/logs/fluent-bit.log
 

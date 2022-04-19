@@ -33,9 +33,19 @@ nodes:
   - containerPort: 32100
     hostPort: 32100
     protocol: TCP
-- role: worker
-- role: worker
-- role: worker
+  extraMounts:
+  - hostPath: /tmp/pods
+    containerPath: /var/log/pods
+    # optional: if set, the mount is read-only.
+    # default false
+    readOnly: false
+    # optional: if set, the mount needs SELinux relabeling.
+    # default false
+    selinuxRelabel: false
+    # optional: set propagation mode (None, HostToContainer or Bidirectional)
+    # see https://kubernetes.io/docs/concepts/storage/volumes/#mount-propagation
+    # default None
+    propagation: Bidirectional
 EOF
 
 echo -e '\nKind cluster started!\n'
